@@ -1,0 +1,55 @@
+[ 새 프로젝트 시작 ]
+* lombok은 STS를 다시 깔지 않는 이상 새로 설치할 필요 없음
+> lombok은 한글 폴더 인식 X
+	STS 경로 안에 한글이 있으면 안됨
+	(처음 롬복 설치시, 설치 후 프로그램 종료 => 재시작)
+
+1. workspace 생성
+2. 폴더 안에 내가 쓸 프로그램 모으기 *tomcat, sts, lombok, sublime 등등
+3. 프로젝트 폴더 생성
+4. 해당 프로젝트 폴더로 sts 열기
+5. 설정 (encoding, server, jdk, compiler, web, 선택적으로 Run/Debug - console - buffer size 1000000으로 설정)
+6. 프로젝트 생성
+7. 서버 포트, 경로 설정
+8. 프로젝트 기본 설정(jdk, server 설정)
+9. pom.xml 설정
+	- DB관련, json 관련, fileupload, security, spring-jdbc, spring-text
+	- log-back 1.2.3 (logback-classic / core)
+	- log4jdbc 1.16 (log4jdbc-log4j2-jdbc4.1) -> text 파일 추가
+		- log4jdbc.log4j2.properties
+		- log4jdbc.spylogdelegator.name=net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator
+
+	- db => hikaricp
+	org.apache.maven.plugins : source 11 / target 11
+	servlet api : 4.0.1 version
+	javax.servlet : artifactId -> javax.servlet-api
+
+기존의 xml 설정 대신 xml => java 클래스 설정으로 변경
+
+MybatisConfig.xml
+=> <setting name="mapUnderscoreToCamelCase" value="true"/>
+=> 일반적으로 DB _ 로 띄어쓰기를 구분 / java CamelCase
+
+web.xml	=> WebConfig extends
+	abstractAnnotaionConfigDispatcherServletInitializer
+	=> rootConfigclass 설정
+	=> servletConfig 설정
+	=> servletMapping 설정
+	=> servletFilter 설정
+	=> customizeRegistration *나중에* exception 처리를 위한 설정 / file
+
+root-context.xml => RootConfig
+	=> DB 설정
+
+servlet-context.xml => ServletConfiguration
+	=> implements WebMvcConfigurer
+
+
+
+
+
+
+
+
+
+
