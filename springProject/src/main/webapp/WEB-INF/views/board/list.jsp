@@ -86,6 +86,12 @@
   </ul>
 </nav>
 </div>
+<script type="text/javascript">
+const isDel = `<c:out value="${isDel}" />`;
+if(parseInt(isDel) > 0){
+	alert('글이 삭제되었습니다.');
+}
+</script>
 <jsp:include page="../common/footer.jsp" />
 </body>
 </html>

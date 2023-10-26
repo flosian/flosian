@@ -144,14 +144,14 @@ public class BoardController {
 	}
 	
 	@GetMapping("/remove")
-	public String remove(@RequestParam("bno")long bno) {
-		int isOk = bsv.remove(bno);
-		log.info("삭제 "+(isOk > 0 ? "OK" : "Fail"));
-		
+	public String remove(@RequestParam("bno")long bno, RedirectAttributes re) {
+		int isDel = bsv.remove(bno);
+		log.info("삭제 "+(isDel > 0 ? "OK" : "Fail"));
+		re.addFlashAttribute("isDel", isDel);
 		return "redirect:/board/list";
 	}
 	
-	@DeleteMapping("/file/{uuid}")
+	@DeleteMapping(value = "/file/{uuid}", produces = MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity<String> removeFile(@PathVariable("uuid")String uuid) {
 		log.info(">>>>>>>>>>> uuid >> "+uuid);
 		int isOk = bsv.removeFile(uuid);

@@ -5,12 +5,14 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.myweb.www.domain.BoardDTO;
 import com.myweb.www.domain.BoardVO;
 import com.myweb.www.domain.FileVO;
 import com.myweb.www.domain.PagingVO;
 import com.myweb.www.repository.BoardDAO;
+import com.myweb.www.repository.CommentDAO;
 import com.myweb.www.repository.FileDAO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +25,9 @@ public class BoardServiceImpl implements BoardService {
 	private BoardDAO bdao;
 	
 	@Inject
+	private CommentDAO cdao;
+	
+	@Inject
 	private FileDAO fdao;
 
 //	@Override
@@ -31,12 +36,16 @@ public class BoardServiceImpl implements BoardService {
 //		return bdao.insert(bvo);
 //	}
 
+	@Transactional
 	@Override
 	public List<BoardVO> getList(PagingVO pagingVO) {
-		log.info("list check 2");
+		// 전체 게시글 가져올 때, 댓글 수, 파일 수 update
+		bdao.updateCmtCnt();
+		bdao.updateFileCnt();
 		return bdao.getList(pagingVO);
 	}
 
+	@Transactional
 	@Override
 	public BoardVO getDetail(long bno) {
 		log.info("detail check 2");
@@ -50,10 +59,13 @@ public class BoardServiceImpl implements BoardService {
 //		bdao.readCount(bvo.getBno(), -2);
 //		return bdao.update(bvo);
 //	}
-
+	
+	@Transactional
 	@Override
 	public int remove(long bno) {
 		log.info("remove check 2");
+		cdao.deleteAllCmt(bno);
+		fdao.deleteAllFile(bno);
 		return bdao.delete(bno);
 	}
 
@@ -63,6 +75,7 @@ public class BoardServiceImpl implements BoardService {
 		return bdao.getTotalCount(pagingVO);
 	}
 
+	@Transactional
 	@Override
 	public int register(BoardDTO bdto) {
 		// bvo, flist 가져와서 각자 db에 저장
@@ -97,13 +110,13 @@ public class BoardServiceImpl implements BoardService {
 		return fdao.removeFile(uuid);
 	}
 
+	@Transactional
 	@Override
 	public int modify(BoardDTO bdto) {
 		bdao.readCount(bdto.getBvo().getBno(), -2);
 		int isMod = bdao.update(bdto.getBvo());
 		if(bdto.getFlist() == null) {
 			isMod *= 1;
-			return isMod;
 		}
 		if(isMod > 0 && bdto.getFlist().size() > 0) {
 			long bno = bdto.getBvo().getBno();
@@ -112,7 +125,8 @@ public class BoardServiceImpl implements BoardService {
 				isMod *= fdao.insertFile(fvo);
 			}
 		}
-		return 0;
+		return isMod;
 	}
+
 	
 }

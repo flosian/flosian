@@ -53,13 +53,21 @@
 		
 			<c:forEach items="${file }" var="fvo">
   			<li class="list-group-item d-flex justify-content-between align-items-center">
-			
-				<div>
-					<img alt="그림 없음" src="/upload/${fn: replace(fvo.saveDir, '\\', '/')}/${fvo.uuid}_th_${fvo.fileName}">
-				</div>
-				<div>${fvo.fileName}
-		    		<span class="badge bg-primary rounded-pill">${fvo.fileSize }Byte</span>
-		    	</div>
+				<c:choose>
+					<c:when test="${fvo.fileType > 0 }">
+						<img alt="그림 없음" src="/upload/${fn: replace(fvo.saveDir, '\\', '/')}/${fvo.uuid}_th_${fvo.fileName}">
+					
+						<div class="ms-2 me-auto">
+							<div class="fw-bold">${fvo.fileName}</div>
+				    		<span class="badge bg-primary rounded-pill">${fvo.fileSize }Byte</span>
+				    	</div>
+					</c:when>
+					<c:otherwise>
+						<div>
+							<!-- file 아이콘 모양 -->
+						</div>
+					</c:otherwise>
+				</c:choose>
 		    	<button type="button" class="fileDelBtn" data-uuid="${fvo.uuid }">X</button>
 			</li>
 			</c:forEach>

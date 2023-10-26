@@ -24,4 +24,7 @@
 	<update id="update">
 		update comment set content = #{content}, mod_at = now() where cno = #{cno}
 	</update>
+	<delete id="deleteAllCmt">
+		delete from comment where bno = #{bno}
+	</delete>
 </mapper>

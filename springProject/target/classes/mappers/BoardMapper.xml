@@ -32,6 +32,14 @@
   		<include refid="search" />
   	</select>
   	
+  	<update id="updateCmtCnt">
+  		update board set cmt_qty = (select count(cno) from comment where bno = board.bno)
+  	</update>
+  	
+  	<update id="updateFileCnt">
+  		update board set has_file = (select count(uuid) from file where bno = board.bno)
+  	</update>
+  	
   	<sql id="search">
 		<if test="type != null">
 			<trim prefix="where (" suffix=")" prefixOverrides="OR">

@@ -25,4 +25,8 @@ public interface BoardDAO {
 
 	long selectOneBno();
 
+	void updateCmtCnt();
+
+	void updateFileCnt();
+
 }
