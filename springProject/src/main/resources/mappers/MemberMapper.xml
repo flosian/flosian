@@ -7,4 +7,7 @@
 		insert into member (email, pwd, nick_name)
 		values(#{email}, #{pwd}, #{nickName})
 	</insert>
+	<insert id="insertAuthInit">
+		insert into auth_member values(#{email}, 'ROLE_USER')
+	</insert>
 </mapper>

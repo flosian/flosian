@@ -27,11 +27,17 @@ public class MemberController {
 	@GetMapping("/register")
 	public void register() {}
 	
-	@PostMapping("/register")
+	@PostMapping({"/register","/login"})
 	public String register(MemberVO mvo) {
 		log.info(">>>>> mvo >>> "+mvo);
 		mvo.setPwd(bcEncoder.encode(mvo.getPwd()));
 		int isOk = msv.register(mvo);
 		return "index";
 	}
+	
+	@PostMapping("/login")
+	public void login() {
+		
+	}
+	
 }
