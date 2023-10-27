@@ -29,7 +29,7 @@ public class FileSweeper {
 	private FileDAO fdao;
 	
 	// 초 분 시 일 월 요일 년도(생략가능)
-	@Scheduled(cron = "0 17 21 * * *")
+	@Scheduled(cron = "0 0 21 * * *")
 	public void fileSweeper() {
 		log.info(">>>> FileSweeper Running Start : { } > "+ LocalDateTime.now());
 		
@@ -65,7 +65,7 @@ public class FileSweeper {
 			String storedFileName = file.toPath().toString();
 			if(!currFiles.contains(storedFileName)) {
 				file.delete(); // 파일 삭제
-				log.info(">>>> delete File > {} >> "+storedFileName);
+				log.info(">>>> delete File > { } >> "+storedFileName);
 			}
 		}
 
