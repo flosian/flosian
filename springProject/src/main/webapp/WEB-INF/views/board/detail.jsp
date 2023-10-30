@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,9 +78,16 @@
 	<!-- 댓글라인 -->
 	<div class="container">
 		<div class="input-group mb-3">
-			<span class="input-group-text" id="cmtWriter">Writer</span>
-			<input type="text" class="form-control" placeholder="Comment Content" id="cmtTxt">
-			<button type="button" class="btn btn-success" id="cmtPostBtn">Post</button>
+		
+			<sec:authorize access="isAuthenticated()">
+				<sec:authentication property="principal.mvo.email" var="authEmail"/>
+				<span class="input-group-text" id="cmtWriter">${authEmail}</span>	
+			</sec:authorize>
+			<sec:authorize access="isAnonymous()">
+				<span class="input-group-text" id="cmtWriter">Writer</span>		
+			</sec:authorize>
+				<input type="text" class="form-control" placeholder="Comment Content" id="cmtTxt">
+				<button type="button" class="btn btn-success" id="cmtPostBtn">Post</button>
 		</div>	
 
 		<!-- 댓글 표시 라인 -->

@@ -49,8 +49,11 @@ primary key(email));
 
 create table auth_member(
 email varchar(100) not null,
-auth varchar(50) not null,
-primary key(email));
+auth varchar(50) not null);
 
 alter table auth_member add constraint fk_auth
 foreign key(email) references member(email)
+
+-- 2023-10-30
+-- auth_member 기본키 삭제
+alter table auth_member drop primary key;

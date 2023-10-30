@@ -23,4 +23,10 @@ public class MemberServiceImpl implements MemberService {
 		int isOk = mdao.insertMember(mvo);
 		return mdao.insertAuthInit(mvo);
 	}
+
+	@Override
+	public boolean updateLastLogin(String authEmail) {
+
+		return mdao.updateLastLogin(authEmail) > 0 ? true : false;
+	}
 }
