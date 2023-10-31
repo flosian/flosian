@@ -17,13 +17,15 @@
 		<th>NickName</th>
 		<th>Reg Date</th>
 		<th>Last Login</th>
+		<th>Auths</th>
 	</tr>
 	<c:forEach items="${list }" var="mvo">
 	<tr>
-		<td>${mvo.email }</td>
+		<td><a href="/member/detail?email=${mvo.email}">${mvo.email }</a></td>
 		<td>${mvo.nickName }</td>
 		<td>${mvo.regAt }</td>
 		<td>${mvo.lastLogin }</td>
+		<td><c:forEach items="${mvo.authList }" var="auths">${auths.auth } </c:forEach></td>
 	</tr>
 	</c:forEach>
 </table>

@@ -69,8 +69,10 @@ function getCommentList(bno, page=1){
                 let li = `<li class="list-group-item" data-cno="${cvo.cno}" data-writer="${cvo.writer}"><div class="mb-3">`;
                 li += `<div class="fw-bold">${cvo.writer}</div>${cvo.content}`;
                 li += `<span class="badge rounded-pill text-bg-dark">${cvo.modAt}</span><br>`;
-                li += `<button type="button" class="btn btn-dark modBtn" data-bs-toggle="modal" data-bs-target="#myModal">%</button>`;
-				li += `<button type="button" class="btn btn-outline-danger delBtn">X</button>`;
+                if(authEmail == cvo.writer){
+                    li += `<button type="button" class="btn btn-dark modBtn" data-bs-toggle="modal" data-bs-target="#myModal">%</button>`;
+                    li += `<button type="button" class="btn btn-outline-danger delBtn">X</button>`;
+                }
                 li += `</div></li>`;
                 cmtListArea.innerHTML += li;
             }

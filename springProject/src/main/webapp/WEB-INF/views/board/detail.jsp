@@ -142,6 +142,8 @@ if(parseInt(isMod)>0){
 let bnoVal = `<c:out value="${bvo.bno}" />`;
 console.log(bnoVal);
 
+let authEmail = `<c:out value="${authEmail}" />`;
+
 </script>
 <script type="text/javascript" src="/resources/js/boardComment.js"></script>
 <script>
