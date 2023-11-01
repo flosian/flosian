@@ -86,6 +86,71 @@ file_size bigint,
 reg_at datetime default now(),
 primary key(uuid));
 
+-----------------------------------
+register.jsp
+파일 추가 설정, js 파일 추가 버튼 설정
+
+--------------------------------------
+
+- 게시글 삭제시 해당 게시글의 댓글, 파일을 모두 삭제
+- 댓글 수, 파일 수 구해서 list에 띄우기
+
+-----------------------------------
+파일 삭제 스케쥴러(예약기능)
+일정 시점에서(예약시점) DB와 현재 업로드 파일 폴더를 비교하여
+DB에는 없고, upload 경로에는 존재하는 파일을 찾아서 삭제하는 기능.
+
+-------------------------------------
+Member => security
+security 패키지를 생성하여 security에 필요한 class를 모아서 처리
+
+로그인(정보) => 회원 / hasRole()(권한) => 해당 페이지 허용
+
+회원 여부 / 권한 => true => successHandler => 로그인 성공
+		Principal 객체로 저장 / Credential 비밀번호 저장
+	         => false => failureHandler => 로그인 실패
+
+User 상속받아 UserDetail 메서드로 처리
+
+admin (관리자) : 상품등록, 재고파악, 결제정보, 구매, 게시판
+user (일반유저) : 구매, 게시판
+no-user (비회원) : 게시판
+
+----------------------------------------
+
+create table member(
+email varchar(100) not null,
+pwd varchar(1000) not null,
+nick_name varchar(100) not null,
+reg_at datetime default now(),
+last_login datetime default null,
+primary key(email));
+
+create table auth_member(
+email varchar(100) not null,
+auth varchar(50) not null,
+primary key(email));
+
+----------------------------------------
+외래키 지정
+
+alter table [테이블명] add foreign key([칼럼명])
+
+옵션 on delete casecade(restrict) / on update cascade(restrict)
+
+update는 이 값이 바뀔 때마다 나도 갱신, delete는 참조하는 키가 삭제되면 나도 삭제
+
+alter table comment add constraint fk_comm foreign key(bno)
+references board(bno) on delete cascade
+
+alter table file add constraint fk_file foreign key(bno)
+references board(bno) on delete cascade
+
+alter table auth_member add constraint fk_auth foreign key(email)
+references member(email) on delete cascade;
+
+
+
 
 
 API

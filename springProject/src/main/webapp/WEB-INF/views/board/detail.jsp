@@ -69,9 +69,13 @@
 			</c:forEach>
 		</ul>
 	</div>
-	
-	<a href="/board/modify?bno=${bvo.bno}"><button type="button" class="btn btn-dark">수정</button></a>
-	<a href="/board/remove?bno=${bvo.bno}"><button type="button" class="btn btn-outline-danger">삭제</button></a>
+	<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal.mvo.email" var="authEmail"/>
+	<c:if test="${bvo.writer eq authEmail }">
+		<a href="/board/modify?bno=${bvo.bno}"><button type="button" class="btn btn-dark">게시글 수정</button></a>
+		<a href="/board/remove?bno=${bvo.bno}"><button type="button" class="btn btn-outline-danger">게시글 삭제</button></a>
+	</c:if>
+	</sec:authorize>
 	<br><br>
 
 </div>
