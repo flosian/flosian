@@ -20,7 +20,7 @@ import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 @MapperScan(basePackages = {"com.mySpring.www.repository"})
-@ComponentScan(basePackages = {"com.mySpring.www.service"})
+@ComponentScan(basePackages = {"com.mySpring.www.service","com.mySpring.www.handler"})
 @EnableAspectJAutoProxy
 @EnableTransactionManagement
 @EnableScheduling

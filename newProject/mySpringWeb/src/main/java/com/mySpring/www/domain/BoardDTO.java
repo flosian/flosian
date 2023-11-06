@@ -1,5 +1,7 @@
 package com.mySpring.www.domain;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,14 +13,9 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class FileVO {
+public class BoardDTO {
 
-	private String uuid;
-	private String saveDir;
-	private String fileName;
-	private int fileType;
-	private long bno;
-	private long fileSize;
-	private String regAt;
+	private BoardVO bvo;
+	private List<FileVO> flist;
 	
 }

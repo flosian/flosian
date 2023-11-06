@@ -23,4 +23,6 @@ public interface BoardDAO {
 
 	void setReadCount(@Param("bno") long bno, @Param("cnt") int cnt);
 
+	long selectOneBno();
+
 }

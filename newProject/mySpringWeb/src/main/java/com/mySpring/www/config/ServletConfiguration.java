@@ -12,7 +12,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 @EnableWebMvc
-@ComponentScan(basePackages = {"com.mySpring.www.controller"})
+@ComponentScan(basePackages = {"com.mySpring.www.controller","com.mySpring.www.handler"})
 public class ServletConfiguration implements WebMvcConfigurer {
 
 	@Override
@@ -20,6 +20,8 @@ public class ServletConfiguration implements WebMvcConfigurer {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 		
 		// 나중에 파일 업로드 경로 추가
+		registry.addResourceHandler("/upload/**").addResourceLocations("file:///D:\\_myweb\\_java\\fileupload\\");
+		
 	}
 
 	@Override
@@ -34,7 +36,7 @@ public class ServletConfiguration implements WebMvcConfigurer {
 	}
 	
 	// bean으로 multipartResolver 설정
-	@Bean(name = "multiparResolver")
+	@Bean(name = "multipartResolver")
 	public MultipartResolver getMultipartResolver() {
 		StandardServletMultipartResolver multiparResolver = new StandardServletMultipartResolver();
 		return multiparResolver;

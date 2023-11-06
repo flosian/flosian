@@ -23,10 +23,13 @@
 	  <span class="input-group-text">Content</span>
 	  <textarea class="form-control" name="content"></textarea>
 	</div><br>
+	<div class="mb-3" id="fileZone">
+		<!-- 첨부파일 표시 구역 -->
+	</div>
 	<div class="d-grid gap-2 col-6 mx-auto">
-		<input type="file" id="file" style="display:none;" multiple="multiple">
+		<input type="file" name="files" id="files" style="display:none;" multiple="multiple">
 		<button class="btn btn-outline-secondary" type="button" id="trigger">File Upload</button>
-		<button type="submit" class="btn btn-primary">등록</button>
+		<button type="submit" class="btn btn-primary" id="regBtn">등록</button>
 	</div>
 </form>
 <script type="text/javascript" src="/resources/js/boardRegister.js"></script>

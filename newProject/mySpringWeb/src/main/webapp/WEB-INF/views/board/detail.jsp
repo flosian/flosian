@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,6 +43,28 @@
 		<tr>
 			<th>Content</th>
 			<td colspan="3">${bvo.content }</td>
+		</tr>
+		<tr>
+			<th>File</th>
+			<td colspan="3">
+				<ul class="list-group">
+				<c:forEach items="${flist }" var="fvo">
+					<c:choose>
+						<c:when test="${fvo.fileType > 0 }">
+							<img alt="그림없음" src="/upload/${fn: replace(fvo.saveDir, '\\', '/')}/${fvo.uuid}_th_${fvo.fileName}">
+							<div class="mb-3">
+								<div class="fw-bold">${fvo.fileName }</div>
+    							<span class="badge bg-primary rounded-pill">${fvo.fileSize }Byte</span>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div>
+							</div>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+				</ul>
+			</td>
 		</tr>
 	</table>
 	<a href="/board/modify?bno=${bvo.bno }"><button type="button" class="btn btn-primary">수정</button></a>

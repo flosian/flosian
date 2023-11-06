@@ -2,7 +2,9 @@ package com.mySpring.www.service;
 
 import java.util.List;
 
+import com.mySpring.www.domain.BoardDTO;
 import com.mySpring.www.domain.BoardVO;
+import com.mySpring.www.domain.FileVO;
 import com.mySpring.www.domain.PagingVO;
 
 public interface BoardService {
@@ -11,12 +13,14 @@ public interface BoardService {
 
 	BoardVO getDetail(long bno);
 
-	int register(BoardVO bvo);
+	int register(BoardDTO bdto);
 
-	int modify(BoardVO bvo);
+	int modify(BoardDTO bdto);
 
 	int remove(long bno);
 
 	int getTotalCnt(PagingVO pgvo);
+
+	List<FileVO> getFile(long bno);
 
 }

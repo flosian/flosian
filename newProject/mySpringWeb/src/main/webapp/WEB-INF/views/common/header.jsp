@@ -15,6 +15,9 @@
 	table a{
 		text-decoration: none;
 	}
+	table img {
+		width : 75px;
+	}
 </style>
 </head>
 <body>
