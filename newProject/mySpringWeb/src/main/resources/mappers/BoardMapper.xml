@@ -7,6 +7,12 @@
 		insert into board(title, writer, content)
 		values (#{title},#{writer},#{content})
 	</insert>
+	<update id="updateCmtCount">
+		update board as b set b.cmt_qty = (select count(cno) from comment as c where c.bno = b.bno)
+	</update>
+	<update id="updateFileCount">
+		update board as b set b.has_file = (select count(uuid) from file as f where f.bno = b.bno)
+	</update>
 	<select id="selectOneBno" resultType="long">
 		select max(bno) from board
 	</select>

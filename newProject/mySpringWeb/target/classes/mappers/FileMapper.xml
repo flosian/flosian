@@ -10,4 +10,7 @@
 	<select id="getAllFile" resultType="com.mySpring.www.domain.FileVO">
 		select * from file where bno = #{bno}
 	</select>
+	<delete id="delFile">
+		delete from file where uuid = #{uuid}
+	</delete>
 </mapper>

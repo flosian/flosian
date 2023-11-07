@@ -43,6 +43,7 @@
 			<td colspan="3">
 				<ul class="list-group">
 				<c:forEach items="${flist }" var="fvo">
+					<li>
 					<c:choose>
 						<c:when test="${fvo.fileType > 0 }">
 							<img alt="그림없음" src="/upload/${fn: replace(fvo.saveDir, '\\', '/')}/${fvo.uuid}_th_${fvo.fileName}">
@@ -56,6 +57,8 @@
 							</div>
 						</c:otherwise>
 					</c:choose>
+					<button type="button" class="btn btn-outline-danger fileDelBtn w-25" data-uuid="${fvo.uuid}">X</button>
+					</li>
 				</c:forEach>
 				</ul>
 			</td>
@@ -67,10 +70,11 @@
 	<div class="d-grid gap-2 col-6 mx-auto">
 		<input type="file" name="files" id="files" style="display:none;" multiple="multiple">
 		<button class="btn btn-outline-secondary" type="button" id="trigger">File Upload</button>
-		<button type="submit" class="btn btn-primary">수정</button>
+		<button type="submit" class="btn btn-primary" id="regBtn">수정</button>
 	</div>
 </form>
 <script type="text/javascript" src="/resources/js/boardRegister.js"></script>
+<script type="text/javascript" src="/resources/js/fileDelete.js"></script>
 <jsp:include page="../common/footer.jsp" />
 
 </body>

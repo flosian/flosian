@@ -5,9 +5,14 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -118,6 +123,15 @@ public class BoardController {
 		log.info("삭제 "+(isDel > 0 ? "OK":"Fail"));
 		re.addFlashAttribute("isDel", isDel);
 		return "redirect:/board/list";
+	}
+	
+	@DeleteMapping(value = "/file/{uuid}", produces = MediaType.TEXT_PLAIN_VALUE)
+	public ResponseEntity<String> delFile(@PathVariable("uuid")String uuid) {
+		log.info(">>>>>>> uuid >>>> "+uuid);
+		int isOk = bsv.delFile(uuid);
+		
+		return isOk > 0 ? new ResponseEntity<String>("1",HttpStatus.OK)
+				: new ResponseEntity<String>("0",HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 }

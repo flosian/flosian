@@ -12,6 +12,7 @@ import com.mySpring.www.domain.BoardVO;
 import com.mySpring.www.domain.FileVO;
 import com.mySpring.www.domain.PagingVO;
 import com.mySpring.www.repository.BoardDAO;
+import com.mySpring.www.repository.CommentDAO;
 import com.mySpring.www.repository.FileDAO;
 
 @Service
@@ -25,6 +26,8 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public List<BoardVO> getList(PagingVO pgvo) {
+		bdao.updateCmtCount();
+		bdao.updateFileCount();
 		return bdao.getList(pgvo);
 	}
 
@@ -89,6 +92,12 @@ public class BoardServiceImpl implements BoardService {
 	public List<FileVO> getFile(long bno) {
 		// TODO Auto-generated method stub
 		return fdao.getAllFile(bno);
+	}
+
+	@Override
+	public int delFile(String uuid) {
+		// TODO Auto-generated method stub
+		return fdao.delFile(uuid);
 	}
 
 }

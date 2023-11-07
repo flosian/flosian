@@ -23,4 +23,6 @@ public interface BoardService {
 
 	List<FileVO> getFile(long bno);
 
+	int delFile(String uuid);
+
 }
